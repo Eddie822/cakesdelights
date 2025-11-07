@@ -9,6 +9,24 @@
             'route' => route('admin.dashboard'),
             'active' => request()->routeIs('admin.dashboard'),
         ],
+        [       //Familias de productos
+            'icon' => 'fa-solid fa-box-open',
+            'name' => 'Familias',
+            'route' => route('admin.families.index'),
+            'active' => request()->routeIs('admin.families.*'),
+        ],
+        [       //Categorías de productos
+            'icon' => 'fa-solid fa-tags',
+            'name' => 'Categorías',
+            'route' => route('admin.categories.index'),
+            'active' => request()->routeIs('admin.categories.*'),
+        ],
+        [
+            'icon' => 'fa-solid fa-pizza-slice',
+            'name' => 'Productos',
+            'route' => '#',
+            'active' => false,
+        ],
         [
             'icon' => 'fa-solid fa-warehouse',
             'name' => 'Almacén',

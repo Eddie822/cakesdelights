@@ -13,7 +13,8 @@ class FamilyController extends Controller
      */
     public function index()
     {
-        //
+        $families = Family::orderBy('id', 'desc')->paginate();
+        return view('admin.families.index', compact('families'));
     }
 
     /**
@@ -21,7 +22,7 @@ class FamilyController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.families.create');
     }
 
     /**
@@ -29,7 +30,20 @@ class FamilyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        Family::create($request->all());
+
+
+        session()->flash('swal', [
+            'icon' => 'success',
+            'title' => 'Creado',
+            'text' => 'Familia creado con exito.',
+        ]);
+
+        return redirect()->route('admin.families.index')->with('success', 'Family created successfully.');
     }
 
     /**
@@ -45,7 +59,7 @@ class FamilyController extends Controller
      */
     public function edit(Family $family)
     {
-        //
+        return view('admin.families.edit', compact('family'));
     }
 
     /**
@@ -53,7 +67,19 @@ class FamilyController extends Controller
      */
     public function update(Request $request, Family $family)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $family->update($request->all());
+
+        session()->flash('swal', [
+            'icon' => 'success',
+            'title' => 'Actualizado!',
+            'text' => 'La familia se ha actualizado correctamente.',
+        ]);
+
+        return redirect()->route('admin.families.index')->with('success', 'Family updated successfully.');
     }
 
     /**
@@ -61,6 +87,24 @@ class FamilyController extends Controller
      */
     public function destroy(Family $family)
     {
-        //
+
+        if ($family->categories->count() > 0) {
+            session()->flash('swal', [
+                'icon' => 'error',
+                'title' => 'Error',
+                'text' => 'No se puede eliminar la familia porque tiene categorías asociadas.',
+            ]);
+            return redirect()->route('admin.families.edit', $family);
+        }
+
+
+        $family->delete();
+
+        session()->flash('swal', [
+            'icon' => 'success',
+            'title' => 'Eliminado!',
+            'text' => 'La familia se ha eliminado correctamente.',
+        ]);
+        return redirect()->route('admin.families.index');
     }
 }
