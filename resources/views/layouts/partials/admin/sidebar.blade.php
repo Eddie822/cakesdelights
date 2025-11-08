@@ -21,6 +21,12 @@
             'route' => route('admin.categories.index'),
             'active' => request()->routeIs('admin.categories.*'),
         ],
+        [       //Subcategorías de productos
+            'icon' => 'fa-solid fa-tag',
+            'name' => 'Subcategorías',
+            'route' => route('admin.subcategories.index'),
+            'active' => request()->routeIs('admin.subcategories.*'),
+        ],
         [
             'icon' => 'fa-solid fa-pizza-slice',
             'name' => 'Productos',

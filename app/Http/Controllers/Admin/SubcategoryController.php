@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
 
@@ -13,15 +14,21 @@ class SubcategoryController extends Controller
      */
     public function index()
     {
-        //
+        $subcategories = Subcategory::with('category.family')
+        ->orderBy('id', 'desc')
+        ->paginate(10);
+
+        return view('admin.subcategories.index', compact('subcategories'));
     }
+
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view('admin.subcategories.create', compact('categories'));
     }
 
     /**
@@ -29,7 +36,20 @@ class SubcategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+
+        Subcategory::create($request->all());
+
+        session()->flash('swal', [
+            'icon' => 'success',
+            'title' => '',
+            'text' => 'Subcategoria creado con exito',
+        ]);
+
+        return redirect()->route('admin.subcategories.index');
     }
 
     /**
@@ -45,7 +65,7 @@ class SubcategoryController extends Controller
      */
     public function edit(Subcategory $subcategory)
     {
-        //
+        return view('admin.subcategories.edit', compact('subcategory'));
     }
 
     /**
@@ -61,6 +81,23 @@ class SubcategoryController extends Controller
      */
     public function destroy(Subcategory $subcategory)
     {
-        //
+        if ($subcategory->products()->count() > 0) {
+            session()->flash('swal', [
+                'icon' => 'error',
+                'title' => 'Error',
+                'text' => 'No se puede eliminar la subcategoría porque tiene productos asociados.',
+            ]);
+
+            return redirect()->route('admin.subcategories.edit', $subcategory);
+        }
+
+        $subcategory->delete();
+
+        session()->flash('swal', [
+            'icon' => 'success',
+            'title' => '',
+            'text' => 'Subcategoría eliminada con éxito.',
+        ]);
+        return redirect()->route('admin.subcategories.index');
     }
 }

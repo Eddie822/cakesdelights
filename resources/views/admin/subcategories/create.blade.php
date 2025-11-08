@@ -1,6 +1,5 @@
 <x-admin-layout>
-
-    <form action="{{ route('admin.categories.store') }}" method="POST">
+  {{-- <form action="{{ route('admin.subcategories.store') }}" method="POST">
         @csrf
         <div class="card">
 
@@ -8,15 +7,15 @@
 
             <div class="mb-4">
                 <x-label class="mb-2">
-                    Familia
+                    Categorias
                 </x-label>
 
-                {{-- Select --}}
-                <x-select  name="family_id" class="w-full">
-                    @foreach ($families as $family)
-                        <option value="{{ $family->id }}"
-                        @selected(old('family_id') == $family->id)>
-                            {{ $family->name }}
+                Select
+                <x-select  name="category_id" class="w-full">
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}"
+                        @selected(old('category_id') == $category->id)>
+                            {{ $category->name }}
                         </option>
                     @endforeach
                     </x-select>
@@ -27,8 +26,7 @@
                     Nombre
                 </x-label>
 
-                {{-- Campo de texto --}}
-                <x-input class="w-full" placeholder="Ingrese el nombre de la categoria" name="name"
+                <x-input class="w-full" placeholder="Ingrese el nombre de la subcategoria" name="name"
                     value="{{ old('name') }}" />
             </div>
             <div>
@@ -37,5 +35,9 @@
                 </x-button>
             </div>
         </div>
-    </form>
+    </form> --}}
+
+
+    @livewire('admin.subcategories.subcategory-create')
+
 </x-admin-layout>
