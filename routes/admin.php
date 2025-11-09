@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CoverController;
 use App\Http\Controllers\Admin\FamilyController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SubcategoryController;
@@ -14,3 +15,4 @@ Route::resource('families', FamilyController::class);
 Route::resource('categories', CategoryController::class);
 Route::resource('subcategories', SubcategoryController::class);
 Route::resource('products', ProductController::class);
+Route::resource('covers', CoverController::class);

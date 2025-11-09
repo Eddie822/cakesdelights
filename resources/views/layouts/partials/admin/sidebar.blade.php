@@ -60,8 +60,8 @@
         [
             'icon' => 'fa-solid fa-globe',
             'name' => 'Contenido Web',
-            'route' => '#',
-            'active' => false,
+            'route' => route('admin.covers.index'),
+            'active' => request()->routeIs('admin.covers.*')
         ],
         [
             'icon' => 'fa-solid fa-users',
