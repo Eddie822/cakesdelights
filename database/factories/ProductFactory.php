@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class ProductFactory extends Factory
 {
+    
     /**
      * Define the model's default state.
      *
@@ -17,12 +18,12 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'sku' => $this->faker->unique()->numberBetween('100000', '999999'),
-            'name' => $this->faker->word(3),
-            'description' => $this->faker->text(),
+            'sku' => $this->faker->unique()->numberBetween(100000,999999),
+            'name' => $this->faker->sentence(),
+            'description' => $this->faker->text(150),
             'image_path' => 'products/'. $this->faker->image('public/storage/products', 640, 480, null, false),
             'price' => $this->faker->randomFloat(2, 1, 100),
-            'subcategory_id' => $this->faker->numberBetween(1,632),
+            'subcategory_id' => $this->faker->numberBetween(1,25),
         ];
     }
 }

@@ -28,10 +28,10 @@
             'active' => request()->routeIs('admin.subcategories.*'),
         ],
         [
-            'icon' => 'fa-solid fa-pizza-slice',
+            'icon' => 'fa-solid fa-cake-candles',
             'name' => 'Productos',
-            'route' => '#',
-            'active' => false,
+            'route' => route('admin.products.index'),
+            'active' => request()->routeIs('admin.products.*'),
         ],
         [
             'icon' => 'fa-solid fa-warehouse',
