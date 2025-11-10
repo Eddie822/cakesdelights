@@ -11,6 +11,10 @@
     @apply bg-red-500 text-white hover:bg-red-700;
   }
 
+  .btn-orange {
+    @apply bg-yellow-400 text-gray-500 hover:bg-yellow-700;
+  }
+
   .btn-green {
     @apply bg-green-500 text-white hover:bg-green-700;
   }
