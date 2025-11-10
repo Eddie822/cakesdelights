@@ -3,7 +3,7 @@
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
             <!-- Logo -->
-            <a href="/" class="flex items-center gap-3">
+            <a href="{{ route('welcome.index') }}" class="flex items-center gap-3">
                 <img src="{{ asset('img/logo.jpeg') }}" alt="Logo" class="h-12 w-auto rounded-full shadow-md">
                 <div>
                     <h1 class="text-white font-bold text-xl md:text-2xl tracking-wide">caKes & delights</h1>
@@ -23,7 +23,7 @@
                     class="absolute md:static top-14 right-0 bg-white md:bg-transparent flex-col md:flex-row shadow-md md:shadow-none
                        text-gray-700 md:text-white gap-3 md:gap-6 px-6 md:px-0 py-4 md:py-0 rounded-md md:rounded-none z-40">
 
-                    <li><a href="#inicio" class="hover:text-yellow-200 transition">Inicio</a></li>
+                    <li><a href="{{ route('welcome.index') }}" class="hover:text-yellow-200 transition">Inicio</a></li>
                     <li><a href="#pasteles" class="hover:text-yellow-200 transition">Pasteles</a></li>
                     <li><a href="#postres" class="hover:text-yellow-200 transition">Postres</a></li>
                     <li><a href="#cupcakes" class="hover:text-yellow-200 transition">Cupcakes</a></li>

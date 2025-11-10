@@ -73,7 +73,7 @@
                 <!-- Línea decorativa -->
                 <div class="w-16 h-1 bg-yellow-400 mx-auto mb-10 rounded-full"></div>
 
-                <!-- Filtros de categorías -->
+                <!-- Filtros de familias -->
                 <div class="flex justify-center space-x-4 mb-10">
                     <button
                         class="bg-red-400 text-white px-6 py-2 rounded-full shadow-md hover:bg-red-500 transition">Todos</button>
