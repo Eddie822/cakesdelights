@@ -23,8 +23,7 @@
 
 <body class="font-sans antialiased">
     <x-banner />
-
-    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div class="min-h-screen bg-[#f3e7d9]"> {{-- color crema pastel suave --}}
         @livewire('navigation')
 
 
@@ -41,9 +40,23 @@
     </div>
     @stack('modals')
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     @livewireScripts
 
     @stack('js')
+
+    @if (session('swal'))
+        <script>
+            Swal.fire({!! json_encode(session('swal')) !!});
+        </script>
+    @endif
+
+    <script>
+        Livewire.on('swal', data => {
+            Swal.fire(data[0]);
+        });
+    </script>
 </body>
 
 </html>

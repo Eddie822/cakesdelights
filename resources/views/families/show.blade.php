@@ -11,12 +11,15 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     @foreach ($products as $product)
                         <article class="bg-white rounded-lg shadow-md overflow-hidden">
-                            <img src="{{ $product->image }}" alt="{{ $product->name }}" class="w-full h-48 object-cover object-center">
+                            <img src="{{ $product->image }}" alt="{{ $product->name }}"
+                                class="w-full h-48 object-cover object-center">
 
                             <div class="p-4">
                                 <h2 class="text-lg font-semibold text-gray-800 mb-2">{{ $product->name }}</h2>
                                 <p class="text-gray-600 mb-3">${{ number_format($product->price, 2) }}</p>
-                                <a href="#" class="btn btn-orange">Ver más</a>
+                                <a href="{{ route('products.show', $product) }}" class="btn btn-orange mb-4">
+                                    Ver mas
+                                </a>
                             </div>
                         </article>
                     @endforeach
