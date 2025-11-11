@@ -24,9 +24,21 @@
                        text-gray-700 md:text-white gap-3 md:gap-6 px-6 md:px-0 py-4 md:py-0 rounded-md md:rounded-none z-40">
 
                     <li><a href="{{ route('welcome.index') }}" class="hover:text-yellow-200 transition">Inicio</a></li>
-                    <li><a href="#pasteles" class="hover:text-yellow-200 transition">Pasteles</a></li>
-                    <li><a href="#postres" class="hover:text-yellow-200 transition">Postres</a></li>
-                    <li><a href="#cupcakes" class="hover:text-yellow-200 transition">Cupcakes</a></li>
+                    <li>
+                        <a href="{{ route('families.show', '19') }}" class="hover:text-yellow-200 transition">
+                            Pasteles
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('families.show', '20') }}" class="hover:text-yellow-200 transition">
+                            Postres
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('families.show', '21') }}" class="hover:text-yellow-200 transition">
+                            Cupcakes
+                        </a>
+                    </li>
                     <li><a href="#nosotros" class="hover:text-yellow-200 transition">Nosotros</a></li>
 
                     <!-- Ícono de login -->

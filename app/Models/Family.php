@@ -12,6 +12,10 @@ class Family extends Model
     protected $fillable = [
         'name',
     ];
+
+    // public function getRouteKeyName(){
+    //     return 'slug';
+    // }
     //Relacion uno a muchos
     public function categories(){
         return $this->hasMany(Category::class);

@@ -1,8 +1,5 @@
 <x-admin-layout>
-    <form action="{{ route('admin.covers.store') }}"
-    method="POST"
-    enctype="multipart/form-data"
-    >
+    <form action="{{ route('admin.covers.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <figure class="relative mb-5">
 
@@ -12,14 +9,13 @@
                     class="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full bg-white/80 dark:bg-gray-900/80 text-gray-700 dark:text-gray-300 shadow-md cursor-pointer backdrop-blur-sm transition-all hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600">
                     <i class="fas fa-camera"></i>
                     <span class="hidden sm:inline">Cambiar imagen</span>
-                    <input type="file" accept="image/*" class="hidden" name="image" onchange="previewImage(event, '#imgPreview')">
+                    <input type="file" accept="image/*" class="hidden" name="image"
+                        onchange="previewImage(event, '#imgPreview')">
                 </label>
             </div>
             <div class="flex justify-center items-center h-full">
                 <img class="w-1/2 h-full object-cover object-center rounded-lg shadow-md"
-                    src="{{ asset('img/no-image.png') }}"
-                    alt="Imagen de portada por defecto"
-                    id="imgPreview">
+                    src="{{ asset('img/no-image.png') }}" alt="Imagen de portada por defecto" id="imgPreview">
             </div>
         </figure>
 
@@ -33,26 +29,26 @@
         </div>
 
         <div class="mb-4">
-              <x-label>
+            <x-label>
                 Fecha de incio
             </x-label>
 
-            <x-input type="date" name="start_at"  class="w-full" value="{{ old('start_at', now()->format('Y-m-d')) }}"/>
+            <x-input type="datetime-local" name="start_at" class="w-full"
+                value="{{ old('start_at', now()->format('Y-m-d\TH:i')) }}" />
 
         </div>
 
         <div class="mb-4">
-              <x-label>
+            <x-label>
                 Fecha fin (opcional)
             </x-label>
 
-            <x-input name="end_at" type="date" class="w-full" value="{{ old('end_at')}}"  />
+            <x-input name="end_at" type="datetime-local" class="w-full" value="{{ old('end_at') }}" />
         </div>
 
         <div class="mb-4 flex space-x-2">
             <label>
-                <x-input type="radio" name="is_active" value="1"
-                checked/>
+                <x-input type="radio" name="is_active" value="1" checked />
                 Activo
             </label>
             <label>

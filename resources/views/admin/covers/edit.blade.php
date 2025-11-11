@@ -67,8 +67,44 @@
             <x-button>
                 Editar portada
             </x-button>
+
+            <x-danger-button class="ml-4" onclick="confirmDelete()">
+                Eliminar
+            </x-danger-button>
         </div>
     </form>
+
+    <form action="{{ route('admin.covers.destroy', $cover) }}" method="POST" id="delete-form">
+        @csrf
+        @method('DELETE')
+    </form>
+
+    @push('js')
+        <script>
+            function confirmDelete() {
+                Swal.fire({
+                    title: "Estas seguro?",
+                    text: "No podras revertir este cambio!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Eliminar!",
+                    cancelButtonText: "Cancelar"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            // title: "Eliminado!",
+                            // text: "La familia ha sido borrado.",
+                            // icon: "success"
+                        });
+
+                        document.getElementById('delete-form').submit();
+                    }
+                });
+            }
+        </script>
+    @endpush
 
     @push('js')
         <script>
