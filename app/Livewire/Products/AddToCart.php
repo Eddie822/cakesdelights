@@ -4,6 +4,7 @@ namespace App\Livewire\Products;
 
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 
 class AddToCart extends Component
 {
@@ -25,6 +26,11 @@ class AddToCart extends Component
                 'sku' => $this->product->sku,
             ]
         ]);
+        if (auth()->check()) {
+            Cart::store(auth()->id());
+        }
+
+        $this->dispatch('cartUpdated', Cart::count()); //(1)
 
         $this->dispatch('swal', [
             'icon' => 'success',

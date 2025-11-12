@@ -25,6 +25,10 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'admin',
+            'last_name' => 'admin',
+            'document_type' => 1,
+            'document_number' => '123456789',
+            'phone' => '1234567890',
             'email' => 'admin@admin.com',
             'password' => bcrypt('12345678'),
         ]);

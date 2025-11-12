@@ -102,14 +102,23 @@
                     </li>
 
                     <!-- Ícono de carrito -->
-                    <li class="relative cursor-pointer">
+                    <a href="{{ route('cart.index') }}" class="relative">
                         <i class="fas fa-shopping-cart text-lg"></i>
-                        <span
-                            class="absolute -top-2 -right-2 bg-yellow-300 text-xs font-bold text-gray-800 rounded-full px-1.5">0</span>
-                    </li>
+                        <span id="cart-count"
+                            class="absolute -top-2 -right-2 bg-yellow-300 text-xs font-bold text-gray-800 rounded-full px-1.5">
+                            {{ Cart::instance('shopping')->count() }}
+                        </span>
+                    </a>
                 </ul>
             </nav>
         </div>
     </header>
     <script src="https://kit.fontawesome.com/6a3264df77.js" crossorigin="anonymous"></script>
 </div>
+@push('js')
+    <script>
+        Livewire.on('cartUpdated', (count) => {
+            document.getElementById('cart-count').innerText = count;
+        });
+    </script>
+@endpush
