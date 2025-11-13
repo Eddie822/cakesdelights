@@ -131,8 +131,8 @@
                     @if ($addresses->count())
                         <ul class="grid grid-cols-3 gap-4">
                             @foreach ($addresses as $address)
-                                <li
-                                    class="{{ $address->default ? 'bg-orange-100' : 'bg-white' }} border rounded-lg shadow mb-2">
+                                <li class="{{ $address->default ? 'bg-orange-100' : 'bg-white' }} border rounded-lg shadow mb-2"
+                                    wire:key="addresses->{{ $address->id }}">
                                     <div class="p-4 flex items-center">
                                         <div>
                                             <i class="fa-solid fa-house text-xl color-orange-400"></i>
@@ -160,7 +160,7 @@
                                             <button wire:click="edit({{ $address->id }})">
                                                 <i class="fa-solid fa-pencil"></i>
                                             </button>
-                                            <button>
+                                            <button wire:click="deleteAddress({{ $address->id }})">
                                                 <i class="fa-solid fa-trash"></i>
                                             </button>
                                         </div>
@@ -169,8 +169,8 @@
                             @endforeach
                         </ul>
                     @else
+                        <p class="text-gray-600 text-center">No hay direcciones de envío registradas.</p>
                     @endif
-                    <p class="text-gray-600 text-center">No hay direcciones de envío registradas.</p>
                 @endif
 
                 <button wire:click="create" class="btn btn-outline-gray w-full flex items-center justify-center mt-4">
