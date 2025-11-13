@@ -28,6 +28,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+
         'name',
         'last_name',
         'document_type',
@@ -35,6 +36,7 @@ class User extends Authenticatable
         'email',
         'phone',
         'password',
+        'role',
     ];
 
     /**
@@ -63,6 +65,10 @@ class User extends Authenticatable
         return $this->hasMany(Address::class);
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
     /**
      * Get the attributes that should be cast.
      *

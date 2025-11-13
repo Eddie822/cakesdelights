@@ -9,19 +9,22 @@
             'route' => route('admin.dashboard'),
             'active' => request()->routeIs('admin.dashboard'),
         ],
-        [       //Familias de productos
+        [
+            //Familias de productos
             'icon' => 'fa-solid fa-box-open',
             'name' => 'Familias',
             'route' => route('admin.families.index'),
             'active' => request()->routeIs('admin.families.*'),
         ],
-        [       //Categorías de productos
+        [
+            //Categorías de productos
             'icon' => 'fa-solid fa-tags',
             'name' => 'Categorías',
             'route' => route('admin.categories.index'),
             'active' => request()->routeIs('admin.categories.*'),
         ],
-        [       //Subcategorías de productos
+        [
+            //Subcategorías de productos
             'icon' => 'fa-solid fa-tag',
             'name' => 'Subcategorías',
             'route' => route('admin.subcategories.index'),
@@ -47,27 +50,21 @@
         ],
         [
             'icon' => 'fa-solid fa-basket-shopping',
-            'name' => 'Pedidos Clientes',
-            'route' => '#',
-            'active' => false,
-        ],
-        [
-            'icon' => 'fa-solid fa-truck-fast',
-            'name' => 'Pedidos Envíos',
-            'route' => '#',
-            'active' => false,
+            'name' => 'Órdenes', // antes: Pedidos Clientes
+            'route' => route('admin.orders.index'),
+            'active' => request()->routeIs('admin.orders.*'),
         ],
         [
             'icon' => 'fa-solid fa-globe',
             'name' => 'Contenido Web',
             'route' => route('admin.covers.index'),
-            'active' => request()->routeIs('admin.covers.*')
+            'active' => request()->routeIs('admin.covers.*'),
         ],
         [
             'icon' => 'fa-solid fa-users',
             'name' => 'Usuarios',
-            'route' => '#',
-            'active' => false,
+            'route' => route('admin.users.index'),
+            'active' => request()->routeIs('admin.users.*'),
         ],
     ];
 @endphp

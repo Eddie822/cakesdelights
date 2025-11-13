@@ -31,11 +31,11 @@
         <div>
             <h3 class="text-lg font-semibold text-white mb-3">Enlaces</h3>
             <ul class="space-y-2 text-sm">
-                <li><a href="#" class="hover:text-white transition">Inicio</a></li>
-                <li><a href="#" class="hover:text-white transition">Pasteles</a></li>
-                <li><a href="#" class="hover:text-white transition">Postres</a></li>
-                <li><a href="#" class="hover:text-white transition">Cupcakes</a></li>
-                <li><a href="#" class="hover:text-white transition">Sobre Nosotros</a></li>
+                <li><a href="{{ route('welcome.index') }}" class="hover:text-white transition">Inicio</a></li>
+                <li><a href="{{ route('families.show', '1') }}" class="hover:text-white transition">Pasteles</a></li>
+                <li><a href="{{ route('families.show', '2') }}" class="hover:text-white transition">Postres</a></li>
+                <li><a href="{{ route('families.show', '3') }}" class="hover:text-white transition">Cupcakes</a></li>
+                <li><a href="{{ route('nosotros.index') }}" class="hover:text-white transition">Sobre Nosotros</a></li>
             </ul>
         </div>
 

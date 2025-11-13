@@ -27,6 +27,11 @@ Route::get('checkout/success', [CheckoutController::class, 'success'])->name('ch
 Route::get('checkout/cancel', [CheckoutController::class, 'cancel'])->name('checkout.cancel');
 
 
+//vista de nosotros
+Route::get('/nosotros', function () {
+    return view('nosotros'); // Llama al archivo nosotros.blade.php
+})->name('nosotros.index');
+
 Route::get('prueba', function () {
     Cart::instance('shopping');
 

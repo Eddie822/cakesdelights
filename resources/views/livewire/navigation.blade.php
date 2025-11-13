@@ -25,21 +25,21 @@
 
                     <li><a href="{{ route('welcome.index') }}" class="hover:text-yellow-200 transition">Inicio</a></li>
                     <li>
-                        <a href="{{ route('families.show', '19') }}" class="hover:text-yellow-200 transition">
+                        <a href="{{ route('families.show', '1') }}" class="hover:text-yellow-200 transition">
                             Pasteles
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('families.show', '20') }}" class="hover:text-yellow-200 transition">
+                        <a href="{{ route('families.show', '2') }}" class="hover:text-yellow-200 transition">
                             Postres
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('families.show', '21') }}" class="hover:text-yellow-200 transition">
+                        <a href="{{ route('families.show', '3') }}" class="hover:text-yellow-200 transition">
                             Cupcakes
                         </a>
                     </li>
-                    <li><a href="#nosotros" class="hover:text-yellow-200 transition">Nosotros</a></li>
+                    <li><a href="{{ route('nosotros.index') }}" class="hover:text-yellow-200 transition">Nosotros</a></li>
 
                     <!-- Ícono de login -->
 
