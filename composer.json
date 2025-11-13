@@ -9,6 +9,7 @@
         "php": "^8.2",
         "hardevine/shoppingcart": "^3.4",
         "laravel-lang/common": "^6.7",
+        "laravel/cashier": "^16.0",
         "laravel/framework": "^12.0",
         "laravel/jetstream": "^5.3",
         "laravel/sanctum": "^4.0",

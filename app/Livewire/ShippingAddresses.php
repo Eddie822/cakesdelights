@@ -72,11 +72,16 @@ class ShippingAddresses extends Component
 
     public function setDefaultAddress($id)
     {
+        // 💡 CORRECCIÓN: Usar 'use ($id)' para pasar la variable al closure
         $this->addresses->each(function ($address) use ($id) {
+            // Usamos 1 o 0 para la base de datos
             $address->update([
-                'default' => $address->id == $id
+                'default' => $address->id == $id ? 1 : 0
             ]);
         });
+
+        // Refrescar las direcciones para actualizar el estado del componente
+        $this->addresses = Address::where('user_id', auth()->id())->get();
     }
     public function render()
     {
