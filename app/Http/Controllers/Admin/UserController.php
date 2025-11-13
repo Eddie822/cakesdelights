@@ -8,6 +8,12 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+    public function index()
+    {
+        $users = User::latest()->paginate(10);
+        return view('admin.users.index', compact('users'));
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -25,9 +31,8 @@ class UserController extends Controller
 
         $user = User::create($validated);
 
-        return redirect()->route('users.index')->with('success', 'Usuario creado correctamente');
+        return redirect()->route('admin.users.index')->with('success', 'Usuario creado correctamente');
     }
-
 
     public function edit(User $user)
     {
