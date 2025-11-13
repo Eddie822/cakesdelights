@@ -132,7 +132,7 @@
                         <ul class="grid grid-cols-3 gap-4">
                             @foreach ($addresses as $address)
                                 <li class="{{ $address->default ? 'bg-orange-100' : 'bg-white' }} border rounded-lg shadow mb-2"
-                                    wire:key="addresses->{{ $address->id }}">
+                                    wire:key="address-{{ $address->id }}">
                                     <div class="p-4 flex items-center">
                                         <div>
                                             <i class="fa-solid fa-house text-xl color-orange-400"></i>
