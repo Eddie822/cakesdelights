@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\FamilyController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\WelcomeController;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Route;
@@ -15,7 +16,7 @@ Route::get('products/{product}', [ProductController::class, 'show'])->name('prod
 
 Route::get('cart', [CartController::class, 'index'])->name('cart.index');
 
-
+Route::get('shipping', [ShippingController::class, 'index'])->name('shipping.index');
 
 Route::get('prueba', function () {
     Cart::instance('shopping');

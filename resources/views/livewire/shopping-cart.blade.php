@@ -68,7 +68,7 @@
                     </p>
                 </div>
 
-                <a href="">
+                <a href="{{ route('shipping.index') }}">
                     <button class="btn btn-orange w-full mt-4">
                         Continuar con la compra
                     </button>

@@ -56,6 +56,11 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    public function addresses()
+    {
+        return $this->hasMany(Address::class);
+    }
+
     /**
      * Get the attributes that should be cast.
      *
