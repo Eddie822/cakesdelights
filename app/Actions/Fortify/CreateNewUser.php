@@ -33,9 +33,15 @@ class CreateNewUser implements CreatesNewUsers
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone' => ['required', 'string', 'max:10'],
             'password' => $this->passwordRules(),
-            'role' => 'user',// Por defecto todos son usuarios normales
-            'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
+            'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature()
+                ? ['accepted', 'required']
+                : '',
         ])->validate();
+
+        // 🔥 Rol automático
+        $role = ($input['email'] === 'admin@gmail.com')
+            ? 'admin'
+            : 'user';
 
         return User::create([
             'name' => $input['name'],
@@ -45,6 +51,7 @@ class CreateNewUser implements CreatesNewUsers
             'email' => $input['email'],
             'phone' => $input['phone'],
             'password' => Hash::make($input['password']),
+            'role' => $role, // ✔ se guarda en BD
         ]);
     }
 }

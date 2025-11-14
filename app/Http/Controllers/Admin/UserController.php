@@ -24,12 +24,19 @@ class UserController extends Controller
             'email' => 'required|email|unique:users',
             'phone' => 'required|string',
             'password' => 'required|string|min=8',
-            'role' => 'required|in:admin,user',
+            // Quitamos el role del validation
         ]);
+
+        // 🔥 Asignar rol automáticamente según el email
+        if ($validated['email'] === 'admin@gmail.com') {
+            $validated['role'] = 'admin';
+        } else {
+            $validated['role'] = 'user';
+        }
 
         $validated['password'] = bcrypt($validated['password']);
 
-        $user = User::create($validated);
+        User::create($validated);
 
         return redirect()->route('admin.users.index')->with('success', 'Usuario creado correctamente');
     }
