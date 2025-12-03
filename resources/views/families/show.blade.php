@@ -48,7 +48,7 @@
                                     {{-- Si no hay stock, se muestra el botón de Notificación --}}
                                     <button disabled
                                         class="w-full inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-lg text-gray-500 bg-gray-200 cursor-not-allowed shadow-inner">
-                                        <i class="fas fa-delete mr-2"></i> Agregar
+                                        <i class="fas fa-times mr-2"></i> Agregar
                                     </button>
                                 @endif
 

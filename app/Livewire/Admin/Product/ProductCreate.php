@@ -44,7 +44,6 @@ class ProductCreate extends Component
                 ]);
             };
         });
-
     }
 
     public function updatedFamilyId($value)
@@ -83,7 +82,7 @@ class ProductCreate extends Component
             'product.price' => 'required|numeric|min:0',
         ]);
 
-        $this->product['image_path'] = $this->image->store('products');
+        $this->product['image_path'] = $this->image->store('products', 'public');
 
         // Create the product
         $product = Product::create($this->product);
