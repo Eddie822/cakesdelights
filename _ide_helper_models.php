@@ -114,24 +114,9 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * @property int $id
- * @property string $value
- * @property string $description
- * @property int $option_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Option $option
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Variant> $variants
- * @property-read int|null $variants_count
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Feature newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Feature newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Feature query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Feature whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Feature whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Feature whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Feature whereOptionId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Feature whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Feature whereValue($value)
  */
 	class Feature extends \Eloquent {}
 }
@@ -139,24 +124,55 @@ namespace App\Models{
 namespace App\Models{
 /**
  * @property int $id
- * @property string $name
- * @property int $type
+ * @property int $supplier_id
+ * @property int $user_id
+ * @property string $status
+ * @property \Illuminate\Support\Carbon|null $expected_delivery_date
+ * @property string $total_cost
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Feature> $features
- * @property-read int|null $features_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Product> $products
- * @property-read int|null $products_count
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Option newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Option newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Option query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Option whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Option whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Option whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Option whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Option whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MaterialOrderItem> $items
+ * @property-read int|null $items_count
+ * @property-read \App\Models\Supplier $supplier
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MaterialOrder newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MaterialOrder newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MaterialOrder query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MaterialOrder whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MaterialOrder whereExpectedDeliveryDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MaterialOrder whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MaterialOrder whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MaterialOrder whereSupplierId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MaterialOrder whereTotalCost($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MaterialOrder whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MaterialOrder whereUserId($value)
  */
-	class Option extends \Eloquent {}
+	class MaterialOrder extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
+ * @property int $material_order_id
+ * @property int $raw_material_id
+ * @property string $quantity_ordered
+ * @property string $unit_cost
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\RawMaterial $material
+ * @property-read \App\Models\MaterialOrder $order
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MaterialOrderItem newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MaterialOrderItem newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MaterialOrderItem query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MaterialOrderItem whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MaterialOrderItem whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MaterialOrderItem whereMaterialOrderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MaterialOrderItem whereQuantityOrdered($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MaterialOrderItem whereRawMaterialId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MaterialOrderItem whereUnitCost($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MaterialOrderItem whereUpdatedAt($value)
+ */
+	class MaterialOrderItem extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -224,15 +240,13 @@ namespace App\Models{
  * @property string|null $description
  * @property string $image_path
  * @property float $price
+ * @property int $stock
  * @property int $subcategory_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read mixed $image
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Option> $options
- * @property-read int|null $options_count
+ * @property-read \App\Models\Recipe|null $recipe
  * @property-read \App\Models\Subcategory $subcategory
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Variant> $variants
- * @property-read int|null $variants_count
  * @method static \Database\Factories\ProductFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product newQuery()
@@ -244,10 +258,82 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product wherePrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product whereSku($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Product whereStock($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product whereSubcategoryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product whereUpdatedAt($value)
  */
 	class Product extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $unit
+ * @property string $current_stock
+ * @property string $min_stock
+ * @property int|null $supplier_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MaterialOrderItem> $orderItems
+ * @property-read int|null $order_items_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\RecipeDetail> $recipeDetails
+ * @property-read int|null $recipe_details_count
+ * @property-read \App\Models\Supplier|null $supplier
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|RawMaterial newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|RawMaterial newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|RawMaterial query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|RawMaterial whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|RawMaterial whereCurrentStock($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|RawMaterial whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|RawMaterial whereMinStock($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|RawMaterial whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|RawMaterial whereSupplierId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|RawMaterial whereUnit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|RawMaterial whereUpdatedAt($value)
+ */
+	class RawMaterial extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\RecipeDetail> $ingredients
+ * @property-read int|null $ingredients_count
+ * @property-read \App\Models\Product|null $product
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Recipe newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Recipe newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Recipe query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Recipe whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Recipe whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Recipe whereUpdatedAt($value)
+ */
+	class Recipe extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
+ * @property int $recipe_id
+ * @property int $raw_material_id
+ * @property string $quantity_required
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\RawMaterial $material
+ * @property-read \App\Models\Recipe $recipe
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|RecipeDetail newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|RecipeDetail newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|RecipeDetail query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|RecipeDetail whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|RecipeDetail whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|RecipeDetail whereQuantityRequired($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|RecipeDetail whereRawMaterialId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|RecipeDetail whereRecipeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|RecipeDetail whereUpdatedAt($value)
+ */
+	class RecipeDetail extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -276,6 +362,37 @@ namespace App\Models{
 /**
  * @property int $id
  * @property string $name
+ * @property string|null $contact_person
+ * @property string|null $phone
+ * @property string|null $email
+ * @property string|null $rfc
+ * @property string|null $address
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MaterialOrder> $materialOrders
+ * @property-read int|null $material_orders_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\RawMaterial> $materials
+ * @property-read int|null $materials_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Supplier newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Supplier newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Supplier query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Supplier whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Supplier whereContactPerson($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Supplier whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Supplier whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Supplier whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Supplier whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Supplier wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Supplier whereRfc($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Supplier whereUpdatedAt($value)
+ */
+	class Supplier extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
+ * @property string $name
  * @property string $last_name
  * @property int $document_type
  * @property string $document_number
@@ -295,8 +412,11 @@ namespace App\Models{
  * @property string|null $pm_type
  * @property string|null $pm_last_four
  * @property string|null $trial_ends_at
+ * @property string $role
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Address> $addresses
  * @property-read int|null $addresses_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MaterialOrder> $materialOrders
+ * @property-read int|null $material_orders_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Order> $orders
@@ -327,6 +447,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User wherePmType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereProfilePhotoPath($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRole($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereStripeId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereTrialEndsAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereTwoFactorConfirmedAt($value)
@@ -335,31 +456,5 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
  */
 	class User extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * @property int $id
- * @property string $sku
- * @property string $name
- * @property string $image_path
- * @property int $product_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Feature> $features
- * @property-read int|null $features_count
- * @property-read \App\Models\Product $product
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Variant newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Variant newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Variant query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Variant whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Variant whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Variant whereImagePath($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Variant whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Variant whereProductId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Variant whereSku($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Variant whereUpdatedAt($value)
- */
-	class Variant extends \Eloquent {}
 }
 

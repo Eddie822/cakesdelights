@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::latest()->paginate(10);
+        $users = User::paginate(10);
         return view('admin.users.index', compact('users'));
     }
 
@@ -48,14 +48,22 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        $request->validate([
+        // 1. Validaciones para la actualización
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'last_name' => 'nullable|string|max:255',
+            // El email debe ser único, EXCLUYENDO al usuario actual ($user->id)
             'email' => 'required|email|unique:users,email,' . $user->id,
             'phone' => 'nullable|string|max:20',
+
+            // AGREGADO: Validación para el número de documento.
+            // Debe ser único, EXCLUYENDO al usuario actual ($user->id)
+            'document_number' => 'nullable|string|max:50|unique:users,document_number,' . $user->id,
+            // NOTA: 'document_type' no se incluye aquí porque no está en la vista de edición.
         ]);
 
-        $user->update($request->only(['name', 'last_name', 'email', 'phone']));
+        // 2. Actualizar el usuario con los campos validados
+        $user->update($validated);
 
         return redirect()->route('admin.users.index')->with('success', 'Usuario actualizado correctamente.');
     }

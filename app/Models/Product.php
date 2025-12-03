@@ -17,31 +17,34 @@ class Product extends Model
         'description',
         'image_path',
         'price',
-        // 'tipo',   //esto va a ser 1=pastel, 2=postres, 3=cupcakes
+        // 'stock', // NOTA: 'stock' NO SE INCLUYE en fillable porque debe ser manipulado por lógica de producción (increment/decrement).
         'subcategory_id',
     ];
 
+    /**
+     * Relación: Un producto está en una subcategoría.
+     */
+    public function subcategory()
+    {
+        return $this->belongsTo(Subcategory::class);
+    }
+
+    /**
+     * Relación: Un producto tiene una receta.
+     */
+    public function recipe()
+    {
+        // Un producto tiene UNA receta (relación uno a uno, si no planeas tener múltiples recetas por producto)
+        return $this->hasOne(Recipe::class);
+    }
+
+    /**
+     * Mutador: Accede a la URL completa de la imagen.
+     */
     public function image(): Attribute
     {
         return Attribute::make(
             get: fn() => Storage::url($this->image_path),
         );
-    }
-
-    //Relacion uno a muchos inversa
-    public function subcategory(){
-        return $this->belongsTo(Subcategory::class);
-    }
-
-    //Relacion uno a muchos
-    public function variants(){
-        return $this->hasMany(Variant::class);
-    }
-
-    //Relacion muchos a muchos
-    public function options(){
-        return $this->belongsToMany(Option::class)
-                    ->withPivot('value',)
-                    ->withTimestamps();
     }
 }

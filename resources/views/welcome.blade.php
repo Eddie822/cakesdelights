@@ -62,12 +62,16 @@
                             </h1>
 
                             <p class="text-gray-600 mt-2 mb-4 line-clamp-1">
-
                                 $ {{ $product->price }}
                             </p>
 
                             <p class="text-gray-600 text-sm mb-4 line-clamp-2">
                                 {{ $product->description ?? 'Delicioso producto artesanal recién hecho.' }}
+                            </p>
+
+                            {{-- Mostrar stock --}}
+                            <p class="text-gray-600 text-sm mb-4 line-clamp-2">
+                                Disponible: {{ $product->stock ?? 'Por el momento no hay disponible' }}
                             </p>
 
                             <a href="{{ route('products.show', $product) }}" class="btn btn-orange mb-4">

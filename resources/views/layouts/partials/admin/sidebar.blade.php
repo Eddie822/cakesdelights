@@ -9,6 +9,7 @@
             'route' => route('admin.dashboard'),
             'active' => request()->routeIs('admin.dashboard'),
         ],
+        // --- GESTIÓN DE PRODUCTOS ---
         [
             //Familias de productos
             'icon' => 'fa-solid fa-box-open',
@@ -36,18 +37,31 @@
             'route' => route('admin.products.index'),
             'active' => request()->routeIs('admin.products.*'),
         ],
+
+        // --- GESTIÓN DE SUPPLY CHAIN (NUEVAS SECCIONES) ---
+        [
+            'icon' => 'fa-solid fa-truck-fast',
+            'name' => 'Proveedores',
+            'route' => route('admin.suppliers.index'),
+            // Activo si la ruta es admin.suppliers.index, create, edit, etc.
+            'active' => request()->routeIs('admin.suppliers.*'),
+        ],
         [
             'icon' => 'fa-solid fa-warehouse',
             'name' => 'Almacén',
-            'route' => '#',
-            'active' => false,
+            'route' => route('admin.raw_materials.index'),
+            // Activo si la ruta es admin.raw_materials.index, create, edit, etc.
+            'active' => request()->routeIs('admin.raw_materials.*'),
         ],
         [
             'icon' => 'fa-solid fa-truck-ramp-box',
             'name' => 'Pedidos Materia Prima',
-            'route' => '#',
-            'active' => false,
+            'route' => route('admin.material_orders.index'),
+            // Usaremos 'material_orders' para la gestión de pedidos a proveedores
+            'active' => request()->routeIs('admin.material_orders.*'),
         ],
+
+        // --- GESTIÓN DE CLIENTES/WEB ---
         [
             'icon' => 'fa-solid fa-basket-shopping',
             'name' => 'Órdenes', // antes: Pedidos Clientes
@@ -71,8 +85,8 @@
 
 <aside id="logo-sidebar"
     class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full
-           bg-white border-r border-gray-200 sm:translate-x-0
-           dark:bg-gray-800 dark:border-gray-700 flex flex-col"
+            bg-white border-r border-gray-200 sm:translate-x-0
+            dark:bg-gray-800 dark:border-gray-700 flex flex-col"
     :class="{
         'translate-x-0': sidebarOpen,
         '-translate-x-full': !sidebarOpen
@@ -86,8 +100,8 @@
                 <li>
                     <a href="{{ $link['route'] }}"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white
-                               hover:bg-gray-100 dark:hover:bg-gray-700 group
-                               {{ $link['active'] ? 'bg-gray-100 dark:bg-gray-700' : '' }}">
+                                hover:bg-gray-100 dark:hover:bg-gray-700 group
+                                {{ $link['active'] ? 'bg-gray-100 dark:bg-gray-700' : '' }}">
                         <span class="inline-flex w-6 h-6 justify-center items-center">
                             <i class="{{ $link['icon'] }}"></i>
                         </span>

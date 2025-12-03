@@ -3,9 +3,12 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CoverController;
 use App\Http\Controllers\Admin\FamilyController;
+use App\Http\Controllers\Admin\MaterialOrderController;
 use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\RawMaterialController;
 use App\Http\Controllers\Admin\SubcategoryController;
+use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +24,17 @@ Route::resource('covers', CoverController::class);
 
 Route::resource('orders', OrdersController::class)->only(['index', 'show']);
 Route::resource('users', UserController::class);
+
+// GESTIÓN DE SUPPLY CHAIN (NUEVOS MÓDULOS)
+// 1. Proveedores
+Route::resource('suppliers', SupplierController::class);
+
+// 2. Almacén / Materia Prima
+Route::resource('raw_materials', RawMaterialController::class);
+
+// 3. Pedidos de Materia Prima
+Route::resource('material_orders', MaterialOrderController::class);
+
+// AGREGADO: Ruta POST personalizada para la recepción manual del pedido
+Route::post('material_orders/{material_order}/receive', [MaterialOrderController::class, 'receive'])
+    ->name('material_orders.receive');

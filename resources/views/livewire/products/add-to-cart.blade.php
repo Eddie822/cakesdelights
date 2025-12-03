@@ -41,6 +41,10 @@
                 $ {{ number_format($product->price, 2) }}
             </div>
 
+            <div class="text-2xl text-gray-700 mb-4">
+                Disponible: {{ ($product->stock ) }}
+            </div>
+
             <div class="flex items-center space-x-6"
             x-data="{
             qty: @entangle('qty'),

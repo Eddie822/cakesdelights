@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class ProductFactory extends Factory
 {
-    
+
     /**
      * Define the model's default state.
      *
@@ -23,6 +23,7 @@ class ProductFactory extends Factory
             'description' => $this->faker->text(150),
             'image_path' => 'products/'. $this->faker->image('public/storage/products', 640, 480, null, false),
             'price' => $this->faker->randomFloat(2, 1, 100),
+            'stock' => $this->faker->numberBetween(0, 100),
             'subcategory_id' => $this->faker->numberBetween(1,25),
         ];
     }
