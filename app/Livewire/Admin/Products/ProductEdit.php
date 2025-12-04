@@ -83,11 +83,16 @@ class ProductEdit extends Component
             'productEdit.price' => 'required|numeric|min:0',
         ]);
 
-        if ($this->image) {
+       if ($this->image) {
 
-            Storage::delete($this->productEdit['image_path']);
-            $this->product['image_path'] = $this->image->store('products');
+        // Borrar imagen anterior del DISK PUBLIC
+        if ($this->productEdit['image_path']) {
+            Storage::disk('public')->delete($this->productEdit['image_path']);
         }
+
+        // Guardar nueva imagen en DISK PUBLIC
+        $this->productEdit['image_path'] = $this->image->store('products', 'public');
+    }
 
         $this->product->update($this->productEdit);
 
