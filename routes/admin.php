@@ -36,5 +36,5 @@ Route::resource('raw_materials', RawMaterialController::class);
 Route::resource('material_orders', MaterialOrderController::class);
 
 // AGREGADO: Ruta POST personalizada para la recepción manual del pedido
-Route::post('material_orders/{material_order}/receive', [MaterialOrderController::class, 'receive'])
+Route::post('material_orders/{order}/receive', [MaterialOrderController::class, 'receive'])
     ->name('material_orders.receive');

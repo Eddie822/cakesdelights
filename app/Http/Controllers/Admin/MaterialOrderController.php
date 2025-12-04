@@ -18,8 +18,8 @@ class MaterialOrderController extends Controller
     public function index()
     {
         $orders = MaterialOrder::with('supplier', 'user')
-                            ->latest()
-                            ->paginate(10);
+            ->latest()
+            ->paginate(10);
 
         return view('admin.material_orders.index', compact('orders'));
     }
@@ -73,33 +73,32 @@ class MaterialOrderController extends Controller
      */
     public function receive(MaterialOrder $order)
     {
-        if ($order->status !== 'received') {
+        // Cargar los items antes de usar la transacción
+        $order->load('items');
 
-            DB::transaction(function () use ($order) {
-
-                // 1. Cambiar el estado a Recibido (Debe ser lo primero)
-                $order->update(['status' => 'received']);
-
-                // 2. LÓGICA CLAVE: SUMAR STOCK A raw_materials
-                foreach ($order->items as $item) {
-
-                    // Usamos findOrFail para lanzar una excepción visible si el material fue eliminado.
-                    $material = RawMaterial::findOrFail($item->raw_material_id);
-
-                    // Aseguramos que la cantidad sea numérica para el incremento
-                    $quantity = (float) $item->quantity_ordered;
-
-                    // Si el sistema falla aquí, significa que la columna 'current_stock' no es DECIMAL/FLOAT
-                    // o que el valor de $quantity es inválido.
-                    $material->increment('current_stock', $quantity);
-                }
-            });
-
-            return back()->with('success', 'Pedido marcado como Recibido. ¡Stock de almacén actualizado!');
+        if ($order->status === 'received') {
+            return back()->with('info', 'El pedido ya había sido marcado como Recibido.');
         }
 
-        return back()->with('info', 'El pedido ya había sido marcado como Recibido.');
+        DB::transaction(function () use ($order) {
+
+            // 1. Marcar como recibido
+            $order->update(['status' => 'received']);
+
+            // 2. Sumar stock correctamente
+            foreach ($order->items as $item) {
+
+                $material = RawMaterial::findOrFail($item->raw_material_id);
+
+                $quantity = (float) $item->quantity_ordered;
+
+                $material->increment('current_stock', $quantity);
+            }
+        });
+
+        return back()->with('success', 'Pedido marcado como Recibido. ¡Stock de almacén actualizado!');
     }
+
 
     /**
      * Muestra el detalle de un pedido específico.

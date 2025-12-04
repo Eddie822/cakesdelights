@@ -33,7 +33,7 @@
                     @foreach ($products as $product)
                         <tr class="bg-white dark:bg-gray-800">
                             <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                class="px-6 py-4 font-medium text-gray-500 whitespace-nowrap dark:text-white">
                                 {{ $product->id }}
                             </th>
                             <td class="px-6 py-4">
@@ -43,7 +43,7 @@
                                 {{ $product->name }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $product->precio }}
+                                $ {{ $product->price }}
                             </td>
 
                             <td class="px-6 py-4">
