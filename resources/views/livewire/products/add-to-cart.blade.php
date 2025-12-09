@@ -42,29 +42,28 @@
             </div>
 
             <div class="text-2xl text-gray-700 mb-4">
-                Disponible: {{ ($product->stock ) }}
+                Disponible: {{ $product->stock }}
             </div>
 
-            <div class="flex items-center space-x-6"
-            x-data="{
-            qty: @entangle('qty'),
-            }" >
-                <button class="btn btn-gray"
-                x-on:click="qty = qty -1"
-                x-bind:disabled="qty ==1">
+            {{-- Sección del contador con límite de stock --}}
+            <div class="flex items-center space-x-6" x-data="{
+                qty: @entangle('qty'),
+                stock: {{ $product->stock }}
+            }">
+
+                <button class="btn btn-gray" x-on:click="qty > 1 ? qty-- : qty" x-bind:disabled="qty <= 1">
                     -
                 </button>
+
                 <span class="inline-block w-2 text-center" x-text="qty"></span>
-                <button class="btn btn-gray"
-                x-on:click="qty++">
+
+                <button class="btn btn-gray" x-on:click="qty < stock ? qty++ : qty" x-bind:disabled="qty >= stock">
                     +
                 </button>
             </div>
 
             <div class="mt-6">
-                <button class="btn btn-orange px-8"
-                wire:click="add_to_cart"
-                wire:loading.attr="disabled">
+                <button class="btn btn-orange px-8" wire:click="add_to_cart" wire:loading.attr="disabled">
                     Agregar al carrito
                 </button>
             </div>

@@ -13,6 +13,17 @@ return new class extends Migration
     {
         Schema::create('recipes', function (Blueprint $table) {
             $table->id();
+
+            // Relación directa con el producto final (Pastel, Postre)
+            // Agregamos unique para asegurar que un producto solo tenga una receta principal.
+            $table->foreignId('product_id')
+                ->constrained()
+                ->unique()
+                ->onDelete('cascade');
+
+            $table->string('name')->unique(); // Nombre de la receta (ej. Receta Base de Tres Leches)
+            $table->unsignedInteger('yield')->default(1); // Rendimiento (Cuántas unidades de producto crea)
+
             $table->timestamps();
         });
     }

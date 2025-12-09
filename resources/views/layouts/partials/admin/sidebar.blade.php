@@ -57,8 +57,19 @@
             'icon' => 'fa-solid fa-truck-ramp-box',
             'name' => 'Pedidos Materia Prima',
             'route' => route('admin.material_orders.index'),
-            // Usaremos 'material_orders' para la gestión de pedidos a proveedores
             'active' => request()->routeIs('admin.material_orders.*'),
+        ],
+        [
+            'icon' => 'fa-solid fa-industry',
+            'name' => 'Producción',
+            'route' => route('admin.productions.index'),
+            'active' => request()->routeIs('admin.productions.*'),
+        ],
+        [
+            'icon' => 'fa-solid fa-receipt',
+            'name' => 'Recetas',
+            'route' => route('admin.recipes.index'),
+            'active' => request()->routeIs('admin.recipes.*'),
         ],
 
         // --- GESTIÓN DE CLIENTES/WEB ---

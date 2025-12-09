@@ -13,7 +13,7 @@ class Recipe extends Model
     protected $fillable = [
         'product_id',
         'name',
-        'yield' // Cuántas unidades de producto se producen con esta receta
+        'yield',
     ];
 
     /**

@@ -26,7 +26,9 @@
 
                                 <button
                                     class="bg-red-100 hover:bg-red-200 text-red-800 text-xs font-semibold rounded px-2.5 py-0.5"
-                                    wire:click="remove('{{ $item->rowId }}')">
+                                    wire:click="remove('{{ $item->rowId }}')"
+                                    wire:loading.attr="disabled"
+                                    wire:target="remove('{{ $item->rowId }}')">
                                     <i class="fas fa-trash-alt"></i>
                                     Remover
                                 </button>
@@ -36,21 +38,31 @@
                             </p>
 
                             <div class="ml-auto space-x-3">
-                                <button class="btn btn-gray" wire:click= "decrease('{{ $item->rowId }}')">
+                                {{-- Botón Disminuir: Deshabilitado si la cantidad es 1 o menos --}}
+                                <button class="btn btn-gray"
+                                    wire:click="decrease('{{ $item->rowId }}')"
+                                    wire:loading.attr="disabled"
+                                    wire:target="decrease('{{ $item->rowId }}')"
+                                    @if($item->qty <= 1) disabled @endif>
                                     -
                                 </button>
 
                                 <span class="inline-block w-2 text-center"> {{ $item->qty }}</span>
 
-                                <button class="btn btn-gray" wire:click= "increase('{{ $item->rowId }}')">
+                                {{-- Botón Aumentar: Se deshabilita si existe el modelo Y se alcanzó el stock --}}
+                                <button class="btn btn-gray"
+                                    wire:click="increase('{{ $item->rowId }}')"
+                                    wire:loading.attr="disabled"
+                                    wire:target="increase('{{ $item->rowId }}')"
+                                    @if($item->model && $item->qty >= $item->model->stock) disabled @endif>
                                     +
                                 </button>
                             </div>
                         </li>
                     @empty
-                        <li class="text-center text-gray-600">
-                            No hay productos en el carrito
-                        </li>
+                        <li class="text-center text-gray-60                            <p class="text-sm">
+                                    No hay productos en el carrito
+                                </li>
                     @endforelse
 
                 </ul>

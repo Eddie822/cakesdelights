@@ -268,6 +268,55 @@ namespace App\Models{
 namespace App\Models{
 /**
  * @property int $id
+ * @property int $user_id
+ * @property \Illuminate\Support\Carbon $start_date
+ * @property \Illuminate\Support\Carbon|null $end_date
+ * @property string $status
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProductionDetail> $details
+ * @property-read int|null $details_count
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Production newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Production newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Production query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Production whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Production whereEndDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Production whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Production whereStartDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Production whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Production whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Production whereUserId($value)
+ */
+	class Production extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
+ * @property int $production_id
+ * @property int $recipe_id
+ * @property int $quantity_produced
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Production $production
+ * @property-read \App\Models\Recipe $recipe
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductionDetail newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductionDetail newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductionDetail query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductionDetail whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductionDetail whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductionDetail whereProductionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductionDetail whereQuantityProduced($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductionDetail whereRecipeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ProductionDetail whereUpdatedAt($value)
+ */
+	class ProductionDetail extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property int $id
  * @property string $name
  * @property string $unit
  * @property string $current_stock
@@ -298,17 +347,23 @@ namespace App\Models{
 namespace App\Models{
 /**
  * @property int $id
+ * @property int $product_id
+ * @property string $name
+ * @property int $yield
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\RecipeDetail> $ingredients
  * @property-read int|null $ingredients_count
- * @property-read \App\Models\Product|null $product
+ * @property-read \App\Models\Product $product
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Recipe newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Recipe newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Recipe query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Recipe whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Recipe whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Recipe whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Recipe whereProductId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Recipe whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Recipe whereYield($value)
  */
 	class Recipe extends \Eloquent {}
 }

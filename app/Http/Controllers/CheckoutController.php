@@ -42,12 +42,16 @@ class CheckoutController extends Controller
         }
 
         // Crear orden con la dirección del usuario autenticado
+        // CORRECCIÓN: Limpiamos los valores numéricos quitando la coma ','
         $order = Order::create([
             'user_id' => auth()->id(),
             'address_id' => $shippingAddress->id,
-            'subtotal' => Cart::instance('shopping')->subtotal(0, '', ''),
-            'tax' => Cart::instance('shopping')->tax(),
-            'total' => Cart::instance('shopping')->total(),
+            // subtotal() sin argumentos devuelve string con coma, lo limpiamos
+            'subtotal' => (float) str_replace(',', '', Cart::instance('shopping')->subtotal()),
+            // tax() devuelve string con coma, lo limpiamos
+            'tax' => (float) str_replace(',', '', Cart::instance('shopping')->tax()),
+            // total() devuelve string con coma (ej: "6,825.00"), lo limpiamos a "6825.00"
+            'total' => (float) str_replace(',', '', Cart::instance('shopping')->total()),
             'status' => 'pending',
         ]);
 

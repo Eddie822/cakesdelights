@@ -94,11 +94,12 @@
 
 
 
+                    {{-- Agregar ruta para que el usuario pueda ver sus pedidos --}}
                     <!-- Ícono de pedidos -->
                     <li class="relative cursor-pointer">
                         <i class="fas fa-clipboard-list text-lg"></i>
                         <span
-                            class="absolute -top-2 -right-2 bg-yellow-300 text-xs font-bold text-gray-800 rounded-full px-1.5">0</span>
+                            class="absolute -top-2 -right-2 bg-yellow-300 text-xs font-bold text-gray-800 rounded-full px-1.5"></span>
                     </li>
 
                     <!-- Ícono de carrito -->
