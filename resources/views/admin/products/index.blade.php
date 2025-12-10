@@ -22,6 +22,9 @@
                             Nombre
                         </th>
                         <th scope="col" class="px-6 py-3">
+                            <!-- Stock -->
+                            Stock
+                        <th scope="col" class="px-6 py-3">
                             Precio
                         </th>
                         <th scope="col" class="px-6 py-3">
@@ -41,6 +44,13 @@
                             </td>
                             <td class="px-6 py-4">
                                 {{ $product->name }}
+                            </td>
+                            <td class="px-6 py-4">
+                                @if ($product->stock == 0)
+                                    -
+                                @else
+                                    {{ $product->stock }}
+                                @endif
                             </td>
                             <td class="px-6 py-4">
                                 $ {{ $product->price }}

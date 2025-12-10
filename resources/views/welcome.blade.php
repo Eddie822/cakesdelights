@@ -69,14 +69,25 @@
                                 {{ $product->description ?? 'Delicioso producto artesanal recién hecho.' }}
                             </p>
 
-                            {{-- Mostrar stock --}}
-                            <p class="text-gray-600 text-sm mb-4 line-clamp-2">
-                                Disponible: {{ $product->stock ?? 'Por el momento no hay disponible' }}
+                            {{-- Indicador de Stock --}}
+                            <p class="text-gray-600 text-sm mb-4 line-clamp-2 font-semibold">
+                                @if ($product->stock > 0)
+                                    <span class="text-green-600">Disponible: {{ $product->stock }}</span>
+                                @else
+                                    <span class="text-red-600">¡Agotado!</span>
+                                @endif
                             </p>
 
-                            <a href="{{ route('products.show', $product) }}" class="btn btn-orange mb-4">
-                                Ver mas
-                            </a>
+                            {{-- Botón de Acción Promociones --}}
+                            @if ($product->stock > 0)
+                                <a href="{{ route('products.show', $product) }}" class="btn btn-orange mb-4">
+                                    Ver mas
+                                </a>
+                            @else
+                                <button disabled class="btn btn-gray mb-4 cursor-not-allowed">
+                                    AGOTADO
+                                </button>
+                            @endif
                         </div>
 
                     </article>
@@ -90,7 +101,7 @@
 
         {{-- Sección de productos destacados --}}
         <section class="py-16 bg-[#f3e7d9] mb-16">
-            <<div class="container mx-auto px-6 text-center">
+            <div class="container mx-auto px-6 text-center">
                 <h2 class="text-3xl font-bold text-gray-800 mb-6">
                     Nuestros Productos
                 </h2>
@@ -119,17 +130,27 @@
                                 class="w-full h-52 object-cover object-center">
 
                             <div class="p-5 text-left">
-                                <h3 class="text-lg font-semibold text-gray-800 mb-2">{{ $product->name }}</h3>
+                                <h3 class="text-lg font-semibold text-gray-800 mb-2 line-clamp-2">{{ $product->name }}</h3>
                                 <p class="text-gray-600 text-sm mb-4 line-clamp-2">
                                     {{ $product->description ?? 'Delicioso producto artesanal recién hecho.' }}</p>
 
                                 <div class="flex items-center justify-between">
                                     <span
                                         class="text-yellow-600 font-bold">${{ number_format($product->price, 2) }}</span>
-                                    <a href="{{ route('products.show', $product) }}" class="btn btn-orange mb-4">
-                                        Ver mas
-                                    </a>
+
+                                    {{-- Botón de Acción Productos Destacados --}}
+                                    @if ($product->stock > 0)
+                                        <a href="{{ route('products.show', $product) }}" class="btn btn-orange">
+                                            Ver mas
+                                        </a>
+                                    @else
+                                        <button disabled class="btn btn-gray cursor-not-allowed">
+                                            AGOTADO
+                                        </button>
+                                    @endif
                                 </div>
+                                <p class="text-xs text-gray-500 mt-2">Stock: {{ $product->stock > 0 ? $product->stock : 'Agotado' }}</p>
+
                             </div>
                         </div>
                     @endforeach
@@ -162,4 +183,5 @@
                 });
             </script>
         @endpush
+    </div>
 </x-app-layout>

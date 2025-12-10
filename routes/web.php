@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\FamilyController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\WelcomeController;
@@ -46,4 +47,13 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    // ====================================================================
+    // RUTAS DE PEDIDOS DEL CLIENTE
+    // ====================================================================
+    // Muestra el historial de pedidos del cliente
+    Route::get('/mis-pedidos', [OrderController::class, 'history'])->name('user.orders.history');
+
+    // Acción para que el cliente marque el pedido como entregado (delivered)
+    Route::post('/pedidos/{order}/delivered', [OrderController::class, 'markAsDelivered'])->name('user.orders.markAsDelivered');
 });

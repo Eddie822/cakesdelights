@@ -96,6 +96,7 @@
 
                     {{-- Agregar ruta para que el usuario pueda ver sus pedidos --}}
                     <!-- Ícono de pedidos -->
+                    <a href="{{ route('user.orders.history') }}" class="relative">
                     <li class="relative cursor-pointer">
                         <i class="fas fa-clipboard-list text-lg"></i>
                         <span

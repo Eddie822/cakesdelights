@@ -24,7 +24,8 @@ Route::resource('subcategories', SubcategoryController::class);
 Route::resource('products', ProductController::class);
 Route::resource('covers', CoverController::class);
 
-Route::resource('orders', OrdersController::class)->only(['index', 'show']);
+Route::post('orders/{order}/status', [OrdersController::class, 'updateStatus'])->name('orders.updateStatus');
+Route::resource('orders', OrdersController::class)->only(['index', 'show', 'update', 'destroy']);
 Route::resource('users', UserController::class);
 
 // GESTIÓN DE SUPPLY CHAIN (NUEVOS MÓDULOS)

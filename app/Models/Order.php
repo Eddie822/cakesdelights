@@ -12,8 +12,17 @@ class Order extends Model
         'subtotal',
         'tax',
         'total',
-        'status'
+        'status',
+        'delivery_date'
     ];
+
+    // CORRECCIÓN CLAVE: Casteamos la fecha para que se maneje como objeto Carbon
+    protected $casts = [
+        'delivery_date' => 'date',
+        // Asegúrate de castear created_at si lo necesitas como fecha de objeto
+        'created_at' => 'datetime',
+    ];
+
 
     public function items()
     {
@@ -25,9 +34,8 @@ class Order extends Model
         return $this->belongsTo(Address::class, 'address_id');
     }
 
-        public function user()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
-
 }
