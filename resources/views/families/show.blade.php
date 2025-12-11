@@ -1,9 +1,46 @@
 <x-app-layout>
     <div class="min-h-screen bg-[#f3e7d9] py-10">
         <div class="container mx-auto px-6">
-            <h1 class="text-4xl font-extrabold text-gray-800 mb-10 text-center border-b-4 border-yellow-400 pb-2">
+            <h1 class="text-4xl font-extrabold text-gray-800 mb-6 text-center border-b-4 border-yellow-400 pb-2">
                 Nuestra Familia: {{ $family->name }}
             </h1>
+
+            @if ($products->isNotEmpty())
+                {{-- SECCIÓN DE FILTROS Y ORDENAMIENTO --}}
+                <div class="flex justify-end mb-8">
+                    <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+                        <label for="sort_by" class="block text-sm font-medium text-gray-700 sr-only">Ordenar por</label>
+                        {{-- El evento onchange redirige a la URL con el nuevo parámetro 'sort' --}}
+                        <select id="sort_by" name="sort_by" onchange="window.location.href = this.value;"
+                            class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500">
+
+                            {{-- Ordenamiento por Relevancia (Default) --}}
+                            <option value="{{ route('families.show', [$family, 'sort' => '']) }}"
+                                {{ !request('sort') ? 'selected' : '' }}>Ordenar por Relevancia</option>
+
+                            {{-- Precio --}}
+                            <option value="{{ route('families.show', [$family, 'sort' => 'price_asc']) }}"
+                                {{ request('sort') == 'price_asc' ? 'selected' : '' }}>Precio (Menor a Mayor)</option>
+
+                            <option value="{{ route('families.show', [$family, 'sort' => 'price_desc']) }}"
+                                {{ request('sort') == 'price_desc' ? 'selected' : '' }}>Precio (Mayor a Menor)</option>
+
+                            {{-- Stock --}}
+                            <option value="{{ route('families.show', [$family, 'sort' => 'stock_desc']) }}"
+                                {{ request('sort') == 'stock_desc' ? 'selected' : '' }}>Stock (Mayor a Menor)</option>
+
+                            {{-- Nombre (Alfabético) --}}
+                            <option value="{{ route('families.show', [$family, 'sort' => 'name_asc']) }}"
+                                {{ request('sort') == 'name_asc' ? 'selected' : '' }}>Nombre (A - Z)</option>
+
+                            <option value="{{ route('families.show', [$family, 'sort' => 'name_desc']) }}"
+                                {{ request('sort') == 'name_desc' ? 'selected' : '' }}>Nombre (Z - A)</option>
+
+                        </select>
+                    </div>
+                </div>
+            @endif
+
 
             @if ($products->isEmpty())
                 <div class="text-center p-10 bg-white rounded-lg shadow-lg">
